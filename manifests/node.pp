@@ -202,7 +202,7 @@ class openshift_origin::node {
   service { [
       'openshift-iptables-port-proxy',
       'openshift-tc',
-      'sshd',
+      'ssh',
       'oddjobd',
       'messagebus',
     ]:
