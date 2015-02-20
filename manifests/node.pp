@@ -116,39 +116,39 @@ class openshift_origin::node {
     path    => ['/usr/sbin', '/usr/bin', '/sbin', '/bin'],
     unless  => '/usr/bin/quota -f $(df /var/lib/openshift/ | tail -1 | tr -s \' \' | cut -d\' \' -f 6 | sort -u) -q 2>/dev/null',
   }
-  sysctl::value { 'kernel.sem':
-    value => "250\t32000\t32\t4096",
+  sysctl { 'kernel.sem':
+    val => "250 32000 32 4096",
   }
-  sysctl::value { 'net.ipv4.ip_local_port_range':
-    value => "15000\t35530",
+  sysctl { 'net.ipv4.ip_local_port_range':
+    val => "15000 35530",
   }
-  sysctl::value { 'net.netfilter.nf_conntrack_max':
-    value => '1048576',
+  sysctl { 'net.netfilter.nf_conntrack_max':
+    val => '1048576',
   }
-  sysctl::value { 'net.ipv4.ip_forward':
-    value => '1',
+  sysctl { 'net.ipv4.ip_forward':
+    val => '1',
   }
-  sysctl::value { 'net.ipv4.conf.all.route_localnet':
-    value => '1',
+  sysctl { 'net.ipv4.conf.all.route_localnet':
+    val => '1',
   }
-  sysctl::value { 'kernel.shmall':
-    value => $::openshift_origin::node_shmall,
+  sysctl { 'kernel.shmall':
+    val => $::openshift_origin::node_shmall,
   }
-  sysctl::value { 'kernel.shmmax':
-    value => $::openshift_origin::node_shmmax,
+  sysctl { 'kernel.shmmax':
+    val => $::openshift_origin::node_shmmax,
   }
-  sysctl::value { 'kernel.msgmnb':
-    value => 65536,
+  sysctl { 'kernel.msgmnb':
+    val => 65536,
   }
-  sysctl::value { 'kernel.msgmax':
-    value => '65536',
+  sysctl { 'kernel.msgmax':
+    val => '65536',
   }
 
   # Reuse closed connections quickly
   # As recommended elsewhere and investigated at length in https://bugzilla.redhat.com/show_bug.cgi?id=1085115
   # this is a safe, effective way to keep lots of short requests from exhausting the connection table.
-  sysctl::value { 'net.ipv4.tcp_tw_reuse':
-    value => '1',
+  sysctl { 'net.ipv4.tcp_tw_reuse':
+    val => '1',
   }
 
   case $::openshift_origin::node_container_plugin {
