@@ -920,6 +920,7 @@ class openshift_origin (
   $broker_krb_service_name              = '',
   $broker_krb_auth_realms               = '',
   $broker_krb_keytab                    = '',
+  $broker_krb_keytab_source             = '',
   $broker_ldap_uri                      = '',
   $broker_ldap_bind_dn                  = '',
   $broker_ldap_bind_password            = '',

@@ -22,12 +22,13 @@ class openshift_origin::plugins::auth::kerberos {
   }
 
   file {'broker http keytab':
-    ensure  => present,
-    path    => $::openshift_origin::broker_krb_keytab,
-    owner   => 'apache',
-    group   => 'apache',
-    mode    => '0644',
-    require => Package['rubygem-openshift-origin-auth-remote-user','httpd']
+      ensure  => present,
+      path    => $::openshift_origin::broker_krb_keytab,
+      source  =>  $::openshift_origin::broker_krb_keytab_source,
+      owner   => 'apache',
+      group   => 'apache',
+      mode    => '0644',
+      require => Package['rubygem-openshift-origin-auth-remote-user','httpd']
   }
 
   file {'broker kerbros.conf':
